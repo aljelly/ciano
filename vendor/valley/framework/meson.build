@@ -22,6 +22,6 @@ valley_framework = files(
     'src/utils/ObjectUtil.vala',
     'src/utils/ShortUtil.vala',
     'src/utils/StringUtil.vala',
-    'src/utils/TimeUtil.vala',
-    'src/utils/URLUtil.vala'
+    'src/utils/URLUtil.vala',
+    'src/utils/ArrayUtil.vala'
 )

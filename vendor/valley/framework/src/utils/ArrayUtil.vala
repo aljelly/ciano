@@ -24,31 +24,34 @@
 namespace Valley.Utils {
 
     /**
-     * The class {@code TimeUtil} handles time-related data.
+     * The {@code ArrayUtil} class is responsible for managing arrays.
      *
-     * @since 0.1.0
+     * @since 0.1.5
      */
-    public class TimeUtil {
-     
+    public class ArrayUtil {
+
         /**
-         * Responsible for getting the value of in string duration in 
-         * the format "00:00:00:00.00" and returning the duration in seconds.
+         * Join generic string arrays.
          *
          * Exemple:
-         * > TimeUtil.duration_in_seconds("00:01:14:36.00")  = 74
+         * > ArrayUtil.join_generic_string_arrays(new GenericArray<string>, new GenericArray<string>)
          * 
-         * @param  {@code string} duration
-         * @return {@code int}
+         * @param   {@code GenericArray<string>} array1
+         * @param   {@code GenericArray<string>} array2
+         * @return  {@code GenericArray} 
          */
-        public static int duration_in_seconds (string duration) {
-            string[] str = duration.split (".");
-            string[] time = str[0].split (":");
+        public static GenericArray join_generic_string_arrays (GenericArray<string> array1, GenericArray<string> array2) {
+            var new_array = new GenericArray<string> ();
 
-            var hours = int.parse (time[0]);
-            var mins = int.parse (time[1]);
-            var secs = int.parse (time[2]);
-            
-            return secs + (hours * 3600) + (mins * 60);
+           array1.foreach ((str) => {
+                new_array.add (str);
+            });
+
+            array2.foreach ((str) => {
+                new_array.add (str);
+            });
+
+            return new_array;
         }
     }
 }
