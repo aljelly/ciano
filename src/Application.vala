@@ -28,12 +28,16 @@ namespace Ciano {
     /**
      * The {@code Application} class is a foundation for all granite-based applications.
      *
-     * @see Granite.Application
-     * @since 0.1.0
+     * @author  Robert San <robertsanseries@gmail.com>
+     * @see     Granite.Application
+     * @since   v0.1.0
      */
     public class Application : Granite.Application {
 
-        private Window window { get; private set; default = null; }
+        /**
+         * 
+         */
+        private Window _window;
 
         /**
          * Constructs a new {@code Application} object and create default output folder if it does not exist.
@@ -55,21 +59,21 @@ namespace Ciano {
          * @return {@code void}
          */
         public override void activate () {
-            if (window == null) {
-                window = new Window (this);
-                add_window (window);
-                window.show_all ();
+            if (this._window == null) {
+                this._window = new Window (this);
+                this.add_window (this._window);
+                this._window.show ();
             }
 
             var quit_action = new SimpleAction ("quit", null);
             quit_action.activate.connect (() => {
-                if (window != null) {
-                    window.destroy ();
+                if (this._window != null) {
+                    this._window.destroy ();
                 }
             });
 
-            add_action (quit_action);
-            add_accelerator ("<Control>q", "app.quit", null);
+            this.add_action (quit_action);
+            this.add_accelerator ("<Control>q", "app.quit", null);
         }
     }
 }

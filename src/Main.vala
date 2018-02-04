@@ -24,9 +24,10 @@
 /**
  * Main method. Responsible for starting the {@code Application} class.
  *
- * @see Ciano.Application
- * @return {@code void}
- * @since 0.1.0
+ * @author  Robert San <robertsanseries@gmail.com>
+ * @see 	Ciano.Application
+ * @return 	{@code void}
+ * @since 	v0.1.0
  */
 public static void main (string [] args) {
 	var app = new Ciano.Application ();
