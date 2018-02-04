@@ -10,9 +10,6 @@ sources = files(
 
 	'services/Settings.vala',
 
-	'utils/ArrayUtil.vala',
-	'utils/FileUtil.vala',
-	'utils/StringUtil.vala',
 	'utils/TimeUtil.vala',
 	'utils/WidgetUtil.vala',
 	
