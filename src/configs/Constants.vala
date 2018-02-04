@@ -27,11 +27,13 @@ namespace Ciano.Configs {
      * The {@code Constants} class is responsible for defining all 
      * the constants used in the application.
      *
-     * @since 0.1.0
+     * @author  Robert San <robertsanseries@gmail.com>
+     * @since   v0.1.0
      */
     public class Constants {
 
         public abstract const string PROGRAME_NAME                          = "Ciano";
+        // Application.vala
         public abstract const string ID                                     = "com.github.robertsanseries.ciano";
         public abstract const string VERSION                                = "0.1.0";
         public abstract const string APP_YEARS                              = "2017";
