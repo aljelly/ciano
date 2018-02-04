@@ -25,9 +25,11 @@ c_args = [
 subdir('data')
 subdir('po')
 subdir('src')
+subdir('vendor/valley/framework')
 
 executable('com.github.robertsanseries.ciano',
     sources,
+    valley_framework,
     gresource,
     c_args: c_args,
     dependencies :[
