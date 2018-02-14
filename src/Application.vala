@@ -1,27 +1,24 @@
 /*
- * MIT License
+ * Copyright (c) 2017 Robert San <robertsanseries@gmail.com>
  *
- * Copyright (c) 2018 Valley Framework
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301 USA
  */
 
 using Ciano.Configs;
+using Ciano.Views;
 
 namespace Ciano {
 
@@ -35,7 +32,8 @@ namespace Ciano {
     public class Application : Granite.Application {
 
         /**
-         * 
+         * Variable responsible for the main window.
+         * @version v0.2.0
          */
         private Window _window;
 
@@ -43,20 +41,37 @@ namespace Ciano {
          * Constructs a new {@code Application} object and create default output folder if it does not exist.
          *
          * @see Ciano.Configs.Constants
+         * @version v0.2.0
          */
         public Application () {
-            Object (
+            Object (               
+                // Unique identifier of the application.
                 application_id: Constants.ID,
-                flags: ApplicationFlags.FLAGS_NONE
-            );
-        }
 
+                // Sed to define the behaviour of a GLib.Application.
+                flags: GLib.ApplicationFlags.FLAGS_NONE // (default)
+            );
+
+            // Name of the application.
+            this.program_name = Constants.PROGRAM_NAME;
+
+            // The compiled binary name.
+            this.exec_name = Constants.ID;
+
+            // The launcher to be associated with this application.
+            this.app_launcher = Constants.ID;
+
+            // Version of the application.
+            this.build_version = Constants.VERSION;
+        }
 
         /**
          * Create the window of this application through the class {@code Window} and show it. If user clicks
          * <quit> or press <control + q> the window will be destroyed.
-         * 
+         *
          * @return {@code void}
+         * @see Ciano.Window
+         * @version v0.2.0
          */
         public override void activate () {
             if (this._window == null) {
@@ -65,6 +80,7 @@ namespace Ciano {
                 this._window.show ();
             }
 
+            // Creates action to destroy the main application window when the user clicks close.
             var quit_action = new SimpleAction ("quit", null);
             quit_action.activate.connect (() => {
                 if (this._window != null) {
@@ -72,7 +88,10 @@ namespace Ciano {
                 }
             });
 
+            // Adds the created action the application.
             this.add_action (quit_action);
+
+            // Sets the specified key combination for the created action to be enabled.
             this.add_accelerator ("<Control>q", "app.quit", null);
         }
     }
