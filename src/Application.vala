@@ -35,7 +35,7 @@ namespace Ciano {
          * Variable responsible for the main window.
          * @version v0.2.0
          */
-        private Window _window;
+        private ApplicationView _window;
 
         /**
          * Constructs a new {@code Application} object and create default output folder if it does not exist.
@@ -75,9 +75,9 @@ namespace Ciano {
          */
         public override void activate () {
             if (this._window == null) {
-                this._window = new Window (this);
+                this._window = new ApplicationView (this);
                 this.add_window (this._window);
-                this._window.show ();
+                this._window.show_all ();
             }
 
             // Creates action to destroy the main application window when the user clicks close.
