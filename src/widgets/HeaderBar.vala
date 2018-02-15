@@ -1,28 +1,23 @@
 /*
- * MIT License
+ * Copyright (c) 2017 Robert San <robertsanseries@gmail.com>
  *
- * Copyright (c) 2018 Valley Framework
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301 USA
  */
 
 using Ciano.Configs;
-using Ciano.Services;
 using Ciano.Utils;
 using Valley.Utils;
 
@@ -32,15 +27,25 @@ namespace Ciano.Widgets {
      * The {@code HeaderBar} class is responsible for displaying top bar. Similar to a horizontal box.
      *
      * @see Gtk.HeaderBar
-     * @since 0.1.0
+     * @since v0.1.0
      */
     public class HeaderBar : Gtk.HeaderBar {
 
-        public signal void item_selected ();
-        
-        public Gtk.MenuButton app_menu;
-        public Gtk.Menu       menu;   
+        /**
+         * 
+         */
+        public signal void icon_document_open_clicked ();
+        public signal void icon_output_folder_clicked ();
+        public signal void icon_start_clicked ();
+        public signal void icon_information_clicked ();
+        public signal void icon_settings_clicked ();
 
+        private Gtk.Button _document_open;
+        private Gtk.Button _output_folder;
+        private Gtk.Button _start;
+        private Gtk.Button _information;
+        private Gtk.MenuButton _settings;
+        
         /**
          * Constructs a new {@code HeaderBar} object. Sets the title of the top bar and
          * adds widgets that are displayed.
@@ -49,59 +54,118 @@ namespace Ciano.Widgets {
          * @see icon_settings
          */
         public HeaderBar () {
-            this.set_title (Constants.PROGRAME_NAME);
+            //
+            this.set_title (Constants.PROGRAM_NAME);
             this.show_close_button = true;
-            icon_open_output_folder ();
-            icon_settings ();
+
+            // 
+            this.icon_document_open ();
+
+            //
+            this.icon_output_folder ();
+
+            //
+            this.icon_start ();
+
+            //
+            this.icon_settings ();
+
+            //
+            this.icon_information ();
         }
 
-        private void icon_open_output_folder () {
-            var output_folder = new Gtk.Button();
-            output_folder.set_image (new Gtk.Image.from_icon_name ("folder-saved-search", Gtk.IconSize.LARGE_TOOLBAR));
-            output_folder.tooltip_text = (Properties.TEXT_OPEN_OUTPUT_FOLDER);
+        /**
+         * [icon_open_output_folder description]
+         * 
+         * @return {[type]} [description]
+         */
+        private void icon_document_open () {
+            this._document_open = new Gtk.Button ();
+            this._document_open.set_image (new Gtk.Image.from_icon_name ("document-open", Gtk.IconSize.LARGE_TOOLBAR));
+            this._document_open.tooltip_text = (Properties.TEXT_OPEN_OUTPUT_FOLDER);
+            this._document_open.clicked.connect (() => { icon_document_open_clicked (); });
             
-            output_folder.clicked.connect(() => {
-                var settings = Ciano.Services.Settings.get_instance ();
-                FileUtil.open_folder_file_app(settings.output_folder);                
-            });
+            this.pack_start (this._document_open);
+        }
 
-            this.pack_start (output_folder);
+        /**
+         * [icon_output_folder description]
+         * 
+         * @return {[type]} [description]
+         */
+        private void icon_output_folder () {
+            this._output_folder = new Gtk.Button ();
+            this._output_folder.set_image (new Gtk.Image.from_icon_name ("folder-saved-search", Gtk.IconSize.LARGE_TOOLBAR));
+            this._output_folder.tooltip_text = (Properties.TEXT_OPEN_OUTPUT_FOLDER);
+            this._output_folder.clicked.connect (() => { icon_output_folder_clicked (); });
+            
+            this.pack_start (this._output_folder);
+        }
+
+        /**
+         * [icon_start description]
+         * 
+         * @return {[type]} [description]
+         */
+        private void icon_start () {
+            this._start = new Gtk.Button ();
+            this._start.set_image (new Gtk.Image.from_icon_name ("media-playback-start", Gtk.IconSize.LARGE_TOOLBAR));
+            this._start.tooltip_text = (Properties.TEXT_OPEN_OUTPUT_FOLDER);
+            this._start.clicked.connect (() => { icon_start_clicked (); });
+            
+            this.pack_start (this._start);
         }
 
         /**
          * Add gear icon to open settings menu.
+         *
+         * Creates the settings menu. When the user clicks the preferences option, {@code Gtk.MenuItem} will call
+         * the signal "item_selected". The actions of this signal are in the "on_activate_button_preferences" method
+         * of the ConverterController;
          * 
          * @see menu_settings
          * @return {@code void}
          */
         private void icon_settings () {
-            this.app_menu = new Gtk.MenuButton();
-            this.app_menu.set_image (new Gtk.Image.from_icon_name ("open-menu", Gtk.IconSize.LARGE_TOOLBAR));
-            this.app_menu.tooltip_text = (Properties.TEXT_SETTINGS);
+            var item_preferences = new Gtk.MenuItem.with_label (Properties.TEXT_PREFERENCES);
+            item_preferences.activate.connect(() => { icon_settings_clicked (); });
+            
+            var menu = new Gtk.Menu ();
+            menu.add (item_preferences);
+            menu.show_all ();
 
-            menu_settings();
-
-            this.app_menu.popup = this.menu;
-            this.pack_end (this.app_menu);
+            this._settings = new Gtk.MenuButton();
+            this._settings.set_image (new Gtk.Image.from_icon_name ("open-menu", Gtk.IconSize.LARGE_TOOLBAR));
+            this._settings.tooltip_text = (Properties.TEXT_SETTINGS);
+            this._settings.popup = menu;
+            
+            this.pack_end (this._settings);
         }
 
         /**
-         * Creates the settings menu. When the user clicks the preferences option, {@code Gtk.MenuItem} will call
-         * the signal "item_selected". The actions of this signal are in the "on_activate_button_preferences" method
-         * of the ConverterController;
-         *
-         * @see Ciano.Controllers.ConverterController;
-         * @return {@code void}
+         * [icon_start description]
+         * 
+         * @return {[type]} [description]
          */
-        private void menu_settings () {
-            var about_item = new Gtk.MenuItem.with_label (Properties.TEXT_PREFERENCES);
-            about_item.activate.connect(() => {
-                item_selected ();
-            });
+        private void icon_information () {
+            this._information = new Gtk.Button ();
+            this._information.set_image (new Gtk.Image.from_icon_name ("dialog-information", Gtk.IconSize.LARGE_TOOLBAR));
+            this._information.tooltip_text = (Properties.TEXT_OPEN_OUTPUT_FOLDER);
+            this._information.clicked.connect (() => { icon_information_clicked (); });
+            
+            this.pack_end (this._information);
+        }
 
-            this.menu = new Gtk.Menu ();
-            this.menu.add (about_item);
-            this.menu.show_all ();
+        /**
+         * [set_visible_icons description]
+         * @param {Boolean} bool visible [description]
+         */
+        public void set_visible_icons (bool visible) {
+            WidgetUtil.set_visible (this._document_open, visible);
+            WidgetUtil.set_visible (this._output_folder, visible);
+            WidgetUtil.set_visible (this._start, visible);
+            WidgetUtil.set_visible (this._information, visible);
+            WidgetUtil.set_visible (this._settings, visible);
         }
     }
 }
