@@ -1,24 +1,20 @@
 /*
- * MIT License
+ * Copyright (c) 2017 Robert San <robertsanseries@gmail.com>
  *
- * Copyright (c) 2018 Valley Framework
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301 USA
  */
 
 namespace Ciano.Configs {
@@ -32,12 +28,23 @@ namespace Ciano.Configs {
      */
     public class Constants {
 
-        public abstract const string PROGRAME_NAME                          = "Ciano";
-        // Application.vala
+        // widgets/Window.vala
+        public abstract const string PROGRAM_NAME                          = "Ciano";
+        // configs/Settings.vala
+        public abstract const string DIRECTORY_CIANO                        = "ciano";
+        // Application.vala // widgets/Window.vala
         public abstract const string ID                                     = "com.github.robertsanseries.ciano";
-        public abstract const string VERSION                                = "0.1.0";
+        // widgets/Window.vala
+        public abstract const string URL_CSS                                = "com/github/robertsanseries/ciano/css/style.css";
+        // widgets/Window.vala
+        public abstract const string VERSION                                = "0.2.0";
+        
+        
+
+
         public abstract const string APP_YEARS                              = "2017";
-        public abstract const string APP_ICON                               = "com.github.robertsanseries.ciano";
+        
+
         public abstract const string ABOUT_COMMENTS                         = "Multimedia converter for all the format you need.";
         public abstract const string TRANSLATOR_CREDITS                     = "Github Translators";
         public abstract const string MAIN_URL                               = "https://robertsanseries.github.io/ciano";
@@ -46,8 +53,8 @@ namespace Ciano.Configs {
         public abstract const string TRANSLATE_URL                          = "https://robertsanseries.github.io/ciano";
         public abstract const string TEXT_FOR_ABOUT_DIALOG_WEBSITE          = "Website";
         public abstract const string TEXT_FOR_ABOUT_DIALOG_WEBSITE_URL      = "https://robertsanseries.github.io/ciano";
-        public abstract const string URL_CSS                                = "com/github/robertsanseries/ciano/css/style.css";
-        public abstract const string DIRECTORY_CIANO                        = "/Ciano";
+
+        
         public abstract const string WELCOME_VIEW                           = "welcome-view";
         public abstract const string LIST_BOX_VIEW                          = "list-box-view";
         public abstract const string TEXT_MP4                               = "MP4";
@@ -81,5 +88,7 @@ namespace Ciano.Configs {
         public abstract const string TEXT_WEBM                              = "WEBM";
         public abstract const string [] ABOUT_AUTHORS                       = { "Robert San <robertsanseries@gmail.com>" };
         public abstract const Gtk.License ABOUT_LICENSE_TYPE                = Gtk.License.GPL_3_0;
+
+        
     }
 }

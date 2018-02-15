@@ -33,7 +33,7 @@
 using Granite;
 using Granite.Widgets;
 
-namespace Ciano.Widgets {
+namespace Ciano.Views {
 
 /**
  * An interface for sorting items.

@@ -17,18 +17,14 @@
  * Boston, MA 02110-1301 USA
  */
 
-namespace Ciano.Enums {
+namespace Ciano.Facades {
 
     /**
-     * The enum {@code ColumnEnum} is responsible for representing
-     * the fixed (int) values in the {@code ConverterController} of each
-     * type in the {@code SourceListSidebar}.
      *
-     * @since 0.1.0
+     * @since v0.2.0
      */
-    public enum TypeItemEnum {
-        VIDEO,
-        MUSIC,
-        IMAGE
+    public class ControllerFacade {
+    	
     }
 }
+
