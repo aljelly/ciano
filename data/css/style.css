@@ -17,12 +17,40 @@
 * Boston, MA 02110-1301 USA
 */
 
+/* theme ciano */
 @define-color colorPrimary #80E5FF;
 @define-color textColorPrimary #333333;
-@define-color white #FFFFFF;
+
+
+/* theme dark 
+@define-color colorPrimary #3A4044;
+@define-color textColorPrimary #80E5FF;
+*/
+
+/* theme white 
+@define-color textColorPrimary #34A2A5;
+.headerbar {
+	background-color: #ffffff;
+}
+//this.get_style_context ().add_class (Gtk.STYLE_CLASS_FLAT);
+//this.get_style_context ().add_class ("headerbar");
+
+
+*/
+
+/* theme elementary */
+
+
+
+
+/*
 @define-color black #000000;
 @define-color whiteElementary #FAFAFA;
 @define-color blackElementary #333333;
+
+.window-background-color {
+    background-color: @white;   
+}
 
 .background-color-source-list {
 	background-color: @white;
@@ -40,10 +68,8 @@
     color: #a10705;
 }
 
-.window-background-color {
-    background-color: @white;   
-}
-
 .progress_bar.progressbar {
     background: @colorPrimary;
 }
+
+*/
